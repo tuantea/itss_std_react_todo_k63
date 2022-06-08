@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 /* 
   【TodoItemコンポーネント】
 　・Todoアイテムを表示する
@@ -6,19 +6,17 @@ import React, { useState } from 'react';
 　・チェックボックスにチェックが入っているかアイテムをグレーアウトする
 */
 
-function TodoItem( {item} ) {
-  const [color,setColor]=useState("")
-const onChangeColor=()=>{
-if(color==="")
-setColor("has-text-grey-light")
-if(color==="has-text-grey-light")
-setColor("")
-}
+function TodoItem({ item, onCheck }) {
+  const handleChange = () => {
+    onCheck(item);
+  };
   return (
-    <label className="panel-block"  >
-      <input type="checkbox" onClick={onChangeColor}/>
-      
-      <span className={color}>{item.text}</span>
+    <label className="panel-block">
+      <input type="checkbox" checked={item.done} onChange={handleChange} />
+
+      <span className={item.done ? "has-text-grey-light" : ""}>
+        {item.text}
+      </span>
     </label>
   );
 }
